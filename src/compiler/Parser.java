@@ -59,15 +59,15 @@ public class Parser {
             if(nameToken == lToken.attribute)
                 advance();
             else if(nameToken == EnumToken.SCOLON){
-                throw new CompilerException(String.format("Erro na linha %d. Token ';' era esperado.", lToken.lineNumber));
+                throw new CompilerException("Erro na linha "+lToken.lineNumber+" Token ';' era esperado.");
             }
             else
-                throw new CompilerException(String.format("Erro na linha %d. Token '%s' inesperado. O esperado era '%s'.", lToken.lineNumber, lToken.lexeme, nameToken));
+                throw new CompilerException("Erro na linha "+lToken.lineNumber+". Token '"+lToken.lexeme+"' inesperado. O esperado era '"+nameToken+"'.");
         }
         else
         {            
             if(lToken.name != EnumToken.EOF)
-                throw new CompilerException(String.format("Erro na linha %d. Token '%s' inesperado.", lToken.lineNumber, lToken.lexeme));
+                throw new CompilerException("Erro na linha "+lToken.lineNumber+". Token '"+ lToken.lexeme+"' inesperado.");
             else
                 throw new CompilerException("Token " + lToken.name + " inesperado.");
         } 
@@ -84,7 +84,7 @@ public class Parser {
             if(lToken.name == EnumToken.ID)
                 advance();
             else
-                throw new CompilerException(String.format("Erro na linha %d. Identificador esperado", lToken.lineNumber));
+                throw new CompilerException("Erro na linha "+lToken.lineNumber+". Identificador esperado.");
             match(EnumToken.LBRACES);
             match(EnumToken.PUBLIC);
             match(EnumToken.STATIC);
@@ -158,7 +158,7 @@ public class Parser {
                 match(EnumToken.SCOLON);
             }
         }else{
-            throw new CompilerException(String.format("Erro na linha %d. Declaração esperada", lToken.lineNumber));
+            throw new CompilerException("Erro na linha "+lToken.lineNumber+". Declaração esperada.");
         }
     }
     
@@ -201,7 +201,7 @@ public class Parser {
             match(EnumToken.RPARENTHESE);
             expressionLine();
         }else{
-            throw new CompilerException(String.format("Erro na linha %d. Expressão esperada.", lToken.lineNumber));
+            throw new CompilerException("Erro na linha "+lToken.lineNumber+". Expressão esperada.");
         }
     }
     
@@ -237,7 +237,7 @@ public class Parser {
                 multiExpression();
             }
         }else{
-            throw new CompilerException(String.format("Erro na linha %d. Expressão esperada.", lToken.lineNumber));
+            throw new CompilerException("Erro na linha "+lToken.lineNumber+". Expressão esperada.");
         }
     }
     
@@ -279,7 +279,7 @@ public class Parser {
             classDeclLinha();
         }
         else if(lToken.name != EnumToken.EOF){
-            throw new CompilerException(String.format("Erro na linha %d. Token '%s' inesperado.", lToken.lineNumber, lToken.lexeme));
+            throw new CompilerException("Erro na linha "+lToken.lineNumber+". Token '"+lToken.lexeme+"' inesperado.");
         }
     }
     
@@ -290,13 +290,13 @@ public class Parser {
                 advance();
             }
             else
-                throw new CompilerException("Erro na linha "+lToken.lineNumber+". Identificador esperado");
+                throw new CompilerException("Erro na linha "+lToken.lineNumber+". Identificador esperado.");
             if(lToken.name == EnumToken.EXTENDS){
                 advance();
                 if(lToken.name == EnumToken.ID)
                     advance();
                 else
-                    throw new CompilerException("Erro na linha "+lToken.lineNumber+". Identificador esperado");
+                    throw new CompilerException("Erro na linha "+lToken.lineNumber+". Identificador esperado.");
             }
             match(EnumToken.LBRACES);
             varDeclarationLine();
@@ -319,7 +319,7 @@ public class Parser {
             if(lToken.name == EnumToken.ID){
                 advance();
             }else{
-                throw new CompilerException("Erro na linha "+lToken.lineNumber+". Identificador esperado");
+                throw new CompilerException("Erro na linha "+lToken.lineNumber+". Identificador esperado.");
             }
             match(EnumToken.LPARENTHESE);
             methodParameters();
@@ -374,7 +374,7 @@ public class Parser {
         }else if(lToken.name == EnumToken.BOOLEAN || lToken.name == EnumToken.ID){
             advance();
         }else{
-            throw new CompilerException("Erro na linha "+lToken.lineNumber+". Tipo esperado");
+            throw new CompilerException("Erro na linha "+lToken.lineNumber+". Tipo esperado.");
         }
     } 
 }

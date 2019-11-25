@@ -14,7 +14,6 @@ public enum EnumToken {
     /**
      *  OP ATTRIBUTES
      */
-    
     PLUS,
     MINUS,
     MULT,
@@ -69,9 +68,8 @@ public enum EnumToken {
     WHILE,
 
     /**
-     * TRASHCAN
+     * TRASHCAN LUL
      */
-
     UNDEF,
     EOF,
 }

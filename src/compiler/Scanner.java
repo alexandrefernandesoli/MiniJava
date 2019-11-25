@@ -197,7 +197,7 @@ public class Scanner {
 
                 case 15:
                     if (pos < entrada.length()) {
-                        if (charAtual == '=') {      //Nesse if foi verificado se pos!=entrada.length() porque caso pos fosse igual ao tamanho da entrada
+                        if (charAtual == '=') {
                             lexema += charAtual;
                             state = 16;
                             pos++;
@@ -226,7 +226,7 @@ public class Scanner {
                         if (charAtual == '=') {
                             lexema += charAtual;
                             state = 19;
-                        } else {
+                        } else { // Reconhecimento do relop NEG
                             tok = new Token(EnumToken.RELOP, EnumToken.NEG);
                             tok.lexeme = lexema;
                             tok.lineNumber = lineNumber;
@@ -236,15 +236,15 @@ public class Scanner {
                     pos++;
                     break;
 
-                case 19:    //Reconhecimento do relop NE
+                case 19:    //Reconhecimento do relop NEQ
                     tok = new Token(EnumToken.RELOP, EnumToken.NEQ);
                     tok.lexeme = lexema;
                     tok.lineNumber = lineNumber;
                     return tok;
 
-                case 21:
+                case 21: // Espaços em branco
                     while (pos < entrada.length() && java.lang.Character.isWhitespace(charAtual)) {
-                        if (charAtual == '\n') {
+                        if (charAtual == '\n') { // Aumentando numero linha
                             lineNumber++;
                         }
                         pos++;
@@ -330,9 +330,9 @@ public class Scanner {
                     tok.lineNumber = lineNumber;
                     return tok;
 
-                case 36:
+                case 36: // Comentários
                     while (pos < entrada.length() && (charAtual != '*')) {
-                        if (charAtual == '\n') {
+                        if (charAtual == '\n') { // Aumentando numero da linha
                             lineNumber++;
                         }
                         pos++;
@@ -343,7 +343,7 @@ public class Scanner {
                     if (pos < entrada.length()) {    //Verificando se o laço parou porque o '*' foi encontrado
                         pos++;
                     } else {
-                        throw new CompilerException(String.format("Erro na linha %d. Comentário não fechado.", lineNumber));
+                        throw new CompilerException("Erro na linha "+lineNumber+". Comentário não fechado.");
                     }
                     state = 37;
                     break;
