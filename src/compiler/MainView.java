@@ -46,6 +46,7 @@ public class MainView extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         openAction = new javax.swing.JMenuItem();
         saveAction = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -95,6 +96,14 @@ public class MainView extends javax.swing.JFrame {
             }
         });
         jMenu1.add(saveAction);
+
+        jMenuItem1.setText("Novo arquivo");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem1);
 
         jMenuBar1.add(jMenu1);
 
@@ -156,10 +165,10 @@ public class MainView extends javax.swing.JFrame {
                 inputArea.setText(entrada);
             }
             catch(FileNotFoundException e){
-                JOptionPane.showMessageDialog(this, "Arquivo não encontrado");
+                JOptionPane.showMessageDialog(this, "Arquivo não encontrado.");
             }
             catch(IOException e){
-                JOptionPane.showMessageDialog(this, "Erro na leitura do arquivo");
+                JOptionPane.showMessageDialog(this, "Erro na leitura do arquivo.");
             }
         }
     }//GEN-LAST:event_openActionActionPerformed
@@ -177,9 +186,25 @@ public class MainView extends javax.swing.JFrame {
             }
         }
         catch(IOException e){
-            JOptionPane.showMessageDialog(this, "Erro ao abrir o arquivo");
+            JOptionPane.showMessageDialog(this, "Erro ao abrir o arquivo.");
         }
     }//GEN-LAST:event_saveActionActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        try{
+            File file;
+            JFileChooser fileSelected = new JFileChooser();
+            int result = fileSelected.showDialog(this, "Criar");
+            if(result == JFileChooser.APPROVE_OPTION){
+                file = fileSelected.getSelectedFile();
+                file.createNewFile();
+                inputArea.setText("");
+            }
+        }
+        catch(IOException e){
+            JOptionPane.showMessageDialog(this, "Erro ao criar o arquivo.");
+        }
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -223,6 +248,7 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JTextArea inputArea;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea messageArea;
