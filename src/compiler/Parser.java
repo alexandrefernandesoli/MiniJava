@@ -205,6 +205,23 @@ public class Parser {
         }
     }
     
+    private void firstExpression(){
+        if(lToken.name == EnumToken.INTEGER_LITERAL ||
+           lToken.name == EnumToken.TRUE ||
+           lToken.name == EnumToken.FALSE ||
+           lToken.name == EnumToken.ID ||
+           lToken.name == EnumToken.THIS ||
+           lToken.name == EnumToken.NEW ||
+           lToken.attribute == EnumToken.NEG ||
+           lToken.attribute == EnumToken.LPARENTHESE){
+            expression();
+            if(lToken.attribute == EnumToken.COLON){
+                advance();
+                multiExpression();
+            }
+        }
+    }
+    
     private void multiExpression(){
         if(lToken.name == EnumToken.INTEGER_LITERAL ||
            lToken.name == EnumToken.TRUE ||
@@ -219,6 +236,8 @@ public class Parser {
                 advance();
                 multiExpression();
             }
+        }else{
+            throw new CompilerException(String.format("Erro na linha %d. Expressão esperada.", lToken.lineNumber));
         }
     }
     
