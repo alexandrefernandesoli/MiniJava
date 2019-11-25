@@ -59,7 +59,7 @@ public class Parser {
             if(nameToken == lToken.attribute)
                 advance();
             else if(nameToken == EnumToken.SCOLON){
-                throw new CompilerException("Erro na linha "+lToken.lineNumber+" Token ';' era esperado.");
+                throw new CompilerException("Erro na linha "+lToken.lineNumber+". Token ';' era esperado.");
             }
             else
                 throw new CompilerException("Erro na linha "+lToken.lineNumber+". Token '"+lToken.lexeme+"' inesperado. O esperado era '"+nameToken+"'.");
@@ -347,6 +347,8 @@ public class Parser {
                     advance();
                     methodParameters();
                 }
+            }else{
+                throw new CompilerException("Erro na linha "+lToken.lineNumber+". Identificador esperado.");
             }
         }
     }
