@@ -126,8 +126,25 @@ public class Parser {
         }else if(lToken.name == EnumToken.ID){
             if(lToken.lexeme.equals("System")){
                 advance();
+                if(lToken.attribute == EnumToken.DOT){
+                    advance();
+                    if(lToken.name == EnumToken.ID && lToken.lexeme.equals("out")){
+                        advance();
+                        if(lToken.attribute == EnumToken.DOT){
+                            advance();
+                            if(lToken.name == EnumToken.ID && lToken.lexeme.equals("println")){
+                                advance();
+                                match(EnumToken.LPARENTHESE);
+                                expression();
+                                match(EnumToken.RPARENTHESE);
+                                match(EnumToken.SCOLON);
+                            }
+                        }
+                    }
+                }
+            }else{
+                advance();
             }
-            advance();
             if(lToken.attribute == EnumToken.ATT){
                 advance();
                 expression();
@@ -188,6 +205,23 @@ public class Parser {
         }
     }
     
+    private void multiExpression(){
+        if(lToken.name == EnumToken.INTEGER_LITERAL ||
+           lToken.name == EnumToken.TRUE ||
+           lToken.name == EnumToken.FALSE ||
+           lToken.name == EnumToken.ID ||
+           lToken.name == EnumToken.THIS ||
+           lToken.name == EnumToken.NEW ||
+           lToken.attribute == EnumToken.NEG ||
+           lToken.attribute == EnumToken.LPARENTHESE){
+            expression();
+            if(lToken.attribute == EnumToken.COLON){
+                advance();
+                multiExpression();
+            }
+        }
+    }
+    
     private void expressionLine(){
         if(operation()){
             expression();
@@ -205,7 +239,7 @@ public class Parser {
             }else if(lToken.name == EnumToken.ID){
                 advance();
                 match(EnumToken.LPARENTHESE);
-                
+                multiExpression();
                 match(EnumToken.RPARENTHESE);
             }
         }

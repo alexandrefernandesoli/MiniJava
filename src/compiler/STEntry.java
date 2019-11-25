@@ -1,11 +1,5 @@
 package compiler;
 
-/**
- * @author Bianca de Almeida Dantas
- */
-//Classe que especifica uma entrada da tabela de símbolos. Ela contém uma 
-//string que representa o lexema reconhecido no processo de análise sintática (ou
-//as palavras chaves inseridas no início da compilação.
 public class STEntry 
 {
     public EnumToken tokName;

@@ -7,14 +7,7 @@ package compiler  ;
 import java.util.Iterator;
 import java.util.TreeMap;
 
-/**
- *
- * @author bianca
- */
-//Classe parametrizada que representa uma tabela de símbolos. A classe utiliza
-//a classe TreeMap da API de Java para armazenar os símbolos. TreeMap implementa
-//uma árvore que associa uma chave a um valor: em nosso casa a chave é uma
-//string e o valor é um objeto de qualquer classe que estenda STEntry.
+
 public class SymbolTable<T extends STEntry> implements Iterable<T>
 {
     SymbolTable<T> parent;//Referência à tabela pai (escopo imediatamente anterior).
