@@ -101,6 +101,8 @@ public class Parser {
             statement();
             match(EnumToken.RBRACES);
             match(EnumToken.RBRACES);
+        }else{
+            throw new CompilerException("Erro na linha 1. Classe main esperada.");
         }
     }
     
