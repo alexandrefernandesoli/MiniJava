@@ -96,6 +96,8 @@ public class Parser {
             match(EnumToken.RBRACKET);
             if(lToken.name == EnumToken.ID)
                 advance();
+            else
+                throw new CompilerException("Erro na linha "+lToken.lineNumber+". Identificador esperado.");
             match(EnumToken.RPARENTHESE);
             match(EnumToken.LBRACES);
             statement();
